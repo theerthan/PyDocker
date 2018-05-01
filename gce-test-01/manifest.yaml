@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: flask
+spec:
+  containers:
+    - name: flask
+      image: gcr.io/anand-bindumadhavan/multi-compose
+      command: ['python','-u','app.py']
+      imagePullPolicy: Always
+      ports:
+        - containerPort: 5000
+          hostPort: 80
+      env:
+        - name: MONGODB_HOST
+          value: 127.0.0.1
+    - name: mongodb
+      image: mongo:latest
+      ports:
+        - containerPort: 27017
+          hostPort: 27017
+
